@@ -1,0 +1,10 @@
+<div class="m-backdrop" *ngIf="isOpen" (click)="close()">
+  <div class="m-card card z-depth-4">
+    <div class="card-content">
+      <div routerLink="/my-calendar"><i class="material-icons">view_list</i> mon EDT</div>
+      <div (click)="ocal()"><i class="material-icons">people</i> autres EDT</div>
+      <div routerLink="/homeworks"><i class="material-icons">comment</i> devoirs</div>
+      <div routerLink="/settings"><i class="material-icons">settings</i> params</div>
+    </div>
+  </div>
+</div>

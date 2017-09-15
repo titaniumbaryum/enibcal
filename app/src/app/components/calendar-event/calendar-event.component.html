@@ -1,0 +1,6 @@
+<div class="calendar-event z-depth-1" [class.compact]="compact" [style.borderColor]="color" [style.top]="t2h(event.begin)+'%'"  [style.height]="(t2h(event.end)-t2h(event.begin))+'%'">
+  <div>
+    <b>{{event.title}}</b><br>
+    {{event.location}}
+  </div>
+</div>

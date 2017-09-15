@@ -1,0 +1,15 @@
+<div class="col s12 m6 l4" style="padding:5px;box-sizing:border-box" *ngIf="homework">
+  <div class="card" style="background:rgba(255,255,255,0.1)" [style.opacity]="homework.completers.indexOf(settingsService.user)>-1?0.3:1">
+    <div class="card-content" (click)="folded=!folded">
+      <span class="card-title">{{homework.title}}</span>
+      <p>Par {{homework.author}}. Dans {{homework.stream}}<br>Pour le {{homework.end.toLocaleDateString()}}</p>
+      <p *ngIf="folded">{{homework.description.substr(0, 40)}}{{homework.description.length>40?" ...":""}}</p>
+      <p *ngIf="!folded">{{homework.description}}</p>
+    </div>
+    <div class="card-action">
+      <a [hidden]="homework.completers.indexOf(settingsService.user)>-1 || !(homework.id)" (click)="complete()">terminer</a>
+      <a [hidden]="homework.completers.indexOf(settingsService.user)==-1 || !(homework.id)">terminé</a>
+      <a [hidden]="homework.id">en upload</a>
+    </div>
+  </div>
+</div>

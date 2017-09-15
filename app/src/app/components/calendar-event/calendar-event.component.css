@@ -1,0 +1,21 @@
+.calendar-event{
+  position:absolute;
+  background:rgba(255,255,255,0.05);
+  color:white;
+  border-radius:4px;
+  width:calc(100% - 4px);
+  margin-left:2px;
+  text-align:center;
+  border-top: solid 4px;
+}
+.compact{
+  position:relative;
+  margin-top:4px;
+  height:25px !important;
+}
+.calendar-event>div{
+  position: absolute;
+  width:100%;
+  top:50%;
+  transform:translateY(-50%);
+}

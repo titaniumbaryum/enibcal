@@ -1,0 +1,56 @@
+.fullCol{
+  position:relative;
+  float:left;
+  height:100%;
+  width:50%;
+}
+.outter{
+  position:relative;
+  width:100%;
+  overflow:hidden;
+  user-select: none;
+}
+.outter:after{
+  position:relative;
+  content:"";
+  display:block;
+  width:100%;
+  padding-top:56.25%;
+  min-height:500px;
+  box-sizing:border-box;
+  pointer-events: none;
+}
+.inner{
+  position: absolute;
+  width:100%;
+  height:calc(100% - 50px);
+  bottom:0;
+  left:0;
+}
+.hours{
+  width:25%;
+}
+.day{
+  width:75%;
+}
+.week .hours{
+  width:23%;
+}
+.week .day{
+  width:11%;
+}
+.week .weekend{
+  width:11%;
+}
+@media screen and (max-width: 640px) {
+  .week .day{
+    width:25%;
+  }
+  .week .day{
+    width:15%;
+  }
+  .week .weekend{
+    width:50%;
+    height:auto;
+  }
+}

@@ -1,0 +1,30 @@
+.hours-wrapper{
+  position:relative;
+  height:100%;
+}
+.hour{
+  position:relative;
+  height:9.09%;
+  width:100%;
+}
+.hour:before,.hour:after{
+  position:absolute;
+  display:block;
+  content:"";
+  border-top:solid 1px #DE1B1B;
+  opacity:0.2;
+  width:33%;
+  top:0;
+}
+.hour:before{
+  left:0;
+}
+.hour:after{
+  right:0;
+}
+.hour>div{
+  position:absolute;
+  top:0;
+  left:50%;
+  transform:translate(-50%,-50%);
+}

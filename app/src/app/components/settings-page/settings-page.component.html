@@ -1,0 +1,19 @@
+<div class="row" style="padding:10px 20px">
+  <div class="col s12">
+    <div class="card" style="background: rgba(255,255,255,0.1);">
+      <div class="card-content">
+        <h3>ID ENIB</h3>
+        <input [(ngModel)]="settingsService.user" (change)="settingsService.set('user',settingsService.user)">
+        <h3>Flux</h3>
+        <p>les groupes que vous voulez lire ex: "S1A-A", "MDD thierry jean", ou "cafet"</p>
+        <div class="flux" *ngFor="let stream of streams">{{stream}}<div class="right"><i class="material-icons" (click)="removeStream(stream)">remove_circle</i></div></div>
+        <div class="flux" (click)="addStream()">ajouter un flux<div class="right"><i class="material-icons">add_circle</i></div></div>
+        <h3>Themes</h3>
+        <div class="palette" (click)="setPalette(palette)" *ngFor="let palette of palettes">
+          <div class="color" [style.background]="'#'+color" *ngFor="let color of palette.hud"></div>
+          <div class="palette-title">{{palette.name}}{{palette.name==curPalette.name?" (actuel)":""}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

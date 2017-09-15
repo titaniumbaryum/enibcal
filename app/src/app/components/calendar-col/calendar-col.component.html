@@ -1,0 +1,6 @@
+<div class="events-wrapper">
+  <div *ngFor="let event of events">
+    <app-calendar-event [event]="event" [compact]="compact" (click)="details(event);" *ngIf="isIn(event)">
+    </app-calendar-event>
+  </div>
+</div>

@@ -1,0 +1,7 @@
+<div class="outter" [class.week]="week" (touchstart)="swipeService.ts($event)" (touchend)="swipeService.te($event)">
+  <app-calendar-header [reload]="reload" (reloadButton)="reloadFunction()" [date]="days[0]" [week]="week" (weekSwitch)="weekSwitch($event)" (leftButton)="left()" (rightButton)="right()"></app-calendar-header>
+  <div class="inner">
+    <app-calendar-hours class="fullCol hours"></app-calendar-hours>
+    <app-calendar-col [@flyInOut]="side" [day]="eday" [events]="events" class="fullCol day" [compact]="i>4 && window.innerWidth<640 && week"  [class.weekend]="i>4" *ngFor="let eday of days; let i = index"></app-calendar-col>
+  </div>
+</div>

@@ -1,0 +1,9 @@
+<div class="h z-depth-2">
+  <div class="center">
+    <div class="change left" (click)="reloadFunction()" *ngIf="reload"><i class="material-icons">file_download</i></div>
+    <div class="date left" *ngIf="date">{{now?(week?"cette semaine":"aujourd'hui"):date.toLocaleDateString()}}</div>
+    <div class="change left" (click)="switch()"><i class="material-icons" *ngIf="!week">view_week</i><i class="material-icons" *ngIf="week">view_day</i></div>
+  </div>
+  <div class="arrow left" (click)="left()"><i class="material-icons">arrow_back</i></div>
+  <div class="arrow right" (click)="right()"><i class="material-icons">arrow_forward</i></div>
+</div>
