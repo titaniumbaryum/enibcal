@@ -1,4 +1,4 @@
-var CACHE_NAME = 'enibcal-005';
+var CACHE_NAME = 'enibcal-006';
 var urlsToCache = [
 ];
 
@@ -22,7 +22,7 @@ self.addEventListener('fetch', function(event) {
           console.log("loaded "+event.request.url+" from cache");
           return response;
         }
-        if(event.request.url.toLowerCase().indexOf("api")==-1){
+        if(event.request.url.toLowerCase().indexOf("api")==-1 && event.request.url.toLowerCase().indexOf("proxy")==-1){
           caches.open(CACHE_NAME)
             .then(function(cache) {
               console.log('Opened cache');
