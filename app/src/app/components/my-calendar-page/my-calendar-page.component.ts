@@ -12,6 +12,7 @@ import { Event } from "../../structures/event"
 export class MyCalendarPageComponent implements OnInit {
   events:Event[];
   today = new Date();
+  loading:boolean = false;
   constructor(
     private calendarService:CalendarService,
     private router:Router,
@@ -22,11 +23,15 @@ export class MyCalendarPageComponent implements OnInit {
   }
 
   ngOnInit() {
+    if(new Date().getTime() - this.calendarService.getLastUpdateDate().getTime() > 24*60*60*1000) this.reload();
   }
   reload(){
+    let that = this;
+    this.loading = true;
     this.calendarService.update().then(b=>{
       this.calendarService.get().then(e=>{
         this.events=e;
+        this.loading = false;
       });
     });
   }

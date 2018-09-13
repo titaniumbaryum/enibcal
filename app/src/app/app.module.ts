@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { HttpModule }    from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule }   from '@angular/forms';
+import { environment } from '../environments/environment';
 
 import { CalendarService } from './services/calendar.service';
 import { PaletteService } from './services/palette.service';
@@ -28,6 +29,7 @@ import { ErrorPageComponent } from './components/error-page/error-page.component
 import { HomeworkPageComponent } from './components/homework-page/homework-page.component';
 import { HomeworkComponent } from './components/homework/homework.component';
 import { HomeworkEditComponent } from './components/homework-edit/homework-edit.component';
+import { LoaderComponent } from './components/loader/loader.component';
 
 const appRoutes: Routes = [
   { path: 'homeworks', component: HomeworkPageComponent },
@@ -56,7 +58,8 @@ const appRoutes: Routes = [
     ErrorPageComponent,
     HomeworkPageComponent,
     HomeworkComponent,
-    HomeworkEditComponent
+    HomeworkEditComponent,
+    LoaderComponent
   ],
   imports: [
     BrowserModule,

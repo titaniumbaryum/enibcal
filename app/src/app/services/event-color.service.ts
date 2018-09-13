@@ -12,7 +12,7 @@ export class EventColorService {
     return new Promise((v,c)=>{
       this.colorService.get().then(p=>{
           let ec = JSON.parse(localStorage.eventColor);
-          title=title.replace("CTD ","").replace("TP ","").replace("Labo ","");
+          title=title.toUpperCase().replace(/ /g,"").replace("CTD","").replace("TD","").replace("TP","").replace("LABO","").replace("CM","");
           if(title in ec){
             v(p.cal[ec[title]]);
           }else{

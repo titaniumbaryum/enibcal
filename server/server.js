@@ -3,13 +3,15 @@ var express = require('express'),
     fs = require("fs"),
     mysql = require('mysql');
 
+
 var app = express();
 
 var con = mysql.createConnection({
   host: "localhost",
-  user: "root",
-  password: "",
-  database: "ical3"
+  user: "enibcal",
+  password: "password",
+  database: "ical3",
+	insecureAuth: true
 });
 
 con.connect(function(err) {
@@ -19,8 +21,10 @@ con.connect(function(err) {
   app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    //if("api" in req.originalUrl || "proxy" in req.originalUrl)
     next();
   });
+   app.use(express.static(__dirname + '/dist'));
   // 'http://localhost:4242/proxy'
   app.use('/proxy', function(req, res) {
     console.log("proxy");
@@ -64,6 +68,13 @@ con.connect(function(err) {
       });
     }else res.end( JSON.stringify([]));
   });
+  app.get('/api/homeworks/uncomplete', function(req, res) {
+    if(typeof req.query.id !== "undefined" && typeof req.query.user !== "undefined"){
+      con.query("DELETE FROM `completers` WHERE `homeworkid`='"+req.query.id+"' AND `user`='"+req.query.user+"'", function (err, rc, fields) {
+        res.end( JSON.stringify([]));
+      });
+    }else res.end( JSON.stringify([]));
+  });
   app.get('/api/homeworks/add', function(req, res) {
     console.log("homeworks/add");
     let p={};
@@ -85,8 +96,31 @@ con.connect(function(err) {
       con.query("INSERT INTO `homeworks` (`id`, `stream`, `end`, `title`, `author`, `description`) VALUES (NULL, '"+p["stream"].replace(/'/g,'\\\'')+"', '"+date+"', '"+p["title"].replace(/'/g,'\\\'')+"', '"+p["author"].replace(/'/g,'\\\'')+"', '"+p["description"].replace(/'/g,"\\"+"'")+"');", function (err, rc, fields) {
         res.end( JSON.stringify(rc));
       });
-      
+
     }else res.end( JSON.stringify([]));
   });
-  app.listen(4242);
+  app.get('/api/homeworks/remove', function(req, res) {
+    if(typeof req.query.id !== "undefined"){
+      con.query("DELETE FROM `homeworks` WHERE `id`='"+req.query.id+"'", function (err, rc, fields) {
+        res.end( JSON.stringify([]));
+      });
+    }else res.end( JSON.stringify([]));
+  });
+  app.get('*', function(req, res){
+    fs.readFile( __dirname + "/dist/" + "index.html", 'utf8', function (err, data) {
+      res.end( data );
+    });
+  });
+
+  function clearHomeworks(){
+    con.query("DELETE FROM `homeworks` WHERE `end`<NOW()", function (err, rc, fields) {
+      console.log("cleared homeworks");
+    });
+  }
+  setInterval(function(){
+    clearHomeworks();
+  },1000*3600);
+  clearHomeworks();
+
+	app.listen(80);
 });

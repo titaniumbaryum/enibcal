@@ -1,14 +1,23 @@
 <div class="col s12 m6 l4" style="padding:5px;box-sizing:border-box" [hidden]="!isOpen">
-  <div class="card" style="background: rgba(255,255,255,0.1);">
+  <div class="card" style="background: rgba(125,125,125,0.1);">
     <div class="card-content">
+      <i class="material-icons right" (click)="close()" style="margin-top:-10px;">close</i>
       <input type="text" placeholder="titre" [(ngModel)]="title">
       <div class="row">
         <div class="col s6" *ngFor="let stream of streams">
           <input type="radio" [id]="stream" [value]="stream" [(ngModel)]="selStream" />
           <label [for]="stream">{{stream}}</label>
         </div>
+        <div class="col s6">
+          <input type="radio" id="new" value="new" [(ngModel)]="selStream" />
+          <label for="new">autre</label>
+        </div>
       </div>
-      <input type="text" class="datepicker" placeholder="fin" #date>
+      <input type="text" class="datepicker" placeholder="fin" [hidden]="noDate" #date>
+      <div>
+        <input type="checkbox" id="checkbox" [(ngModel)]="noDate">
+        <label for="checkbox">infini</label>
+      </div>
       <textarea placeholder="description" class="materialize-textarea" [(ngModel)]="description"></textarea>
       <button class="btn" style="width:100%" (click)="submit()">Envoyer</button>
     </div>

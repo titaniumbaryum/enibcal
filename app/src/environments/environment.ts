@@ -4,5 +4,6 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  host:"https://enibcal.titouan.eu/" /*"http://localhost:4242/"*/
 };

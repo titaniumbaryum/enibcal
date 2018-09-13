@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Event } from "../structures/event";
 import { SettingsService } from './settings.service';
+import { environment } from '../../environments/environment';
 @Injectable()
 export class CalendarService {
 
@@ -21,6 +22,7 @@ export class CalendarService {
     return new Promise((v,c)=>{
       that.getFor(this.settingsService.user).then(e=>{
         localStorage.calendar=JSON.stringify(e);
+        localStorage.lastUpdateDate=new Date().getTime();
         v(true);
       });
     });
@@ -53,11 +55,29 @@ export class CalendarService {
     }
     return events;
   }
+  fuse(e):Event[]{
+    e.sort((a,b)=>a.begin.getTime()-b.begin.getTime());
+    let e2:Event[]=[];
+    while(e.length){
+      let x = e.shift();
+      for(let i=0;i<3;i++){
+        if(e.length && x.title==e[0].title && x.location==x.location && Math.abs(e[0].begin.getTime()-x.end.getTime())<=15*60*1000){
+          x.end=e[0].end;
+          e.shift();
+        }
+      }
+      e2.push(x);
+    }
+    return e2;
+  }
   getFor(user:string):Promise<Event[]>{
     return new Promise((v,c)=>{
-      getCal('http://10.3.61.133:4242/proxy',user,events =>{
+      getCal(environment.host+'proxy',user,events =>{
         v(this.parse(JSON.stringify(events)));
       });
-    });
+    }).then(e=>this.fuse(e));
+  }
+  getLastUpdateDate(){
+    return new Date(JSON.parse(localStorage.lastUpdateDate));
   }
 }

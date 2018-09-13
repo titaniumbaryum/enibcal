@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 import { Palette } from '../structures/palette';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class PaletteService {
 
   constructor(private http:Http) { }
   get():Promise<any>{
-    return this.http.get("http://10.3.61.133:4242/api/palette").toPromise()
+    return this.http.get(environment.host+"api/palette").toPromise()
     .then(response => {return response.json()})
     .catch(this.handleError);
   }

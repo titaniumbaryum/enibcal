@@ -1,9 +1,10 @@
 <div class="row" style="padding:0 20px;box-sizing:border-box">
-  <app-homework [homework]="homework" *ngFor="let homework of homeworks"></app-homework>
-  <app-homework-edit #edit (submited)="homeworks.push($event)"></app-homework-edit>
+  <app-homework [homework]="homework" *ngFor="let homework of homeworks" (removed)="remove(homework)" (modified)="modify(homework,editanchor)"></app-homework>
+  <app-homework-edit #edit (submited)="homeworks.push($event)" (removed)="remove($event)"></app-homework-edit>
+  <div class="col s12 m6 l4" #editanchor></div>
 </div>
 <div class="fixed-action-btn">
-  <a class="btn-floating btn-large red" style="background-color: #DE1B1B !important;" (click)="edit.open()">
+  <a class="btn-floating btn-large red" style="background-color: #DE1B1B !important;" (click)="openEdit(editanchor)">
     <i class="large material-icons">mode_comment</i>
   </a>
 </div>

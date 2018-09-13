@@ -1,5 +1,27 @@
 /* You can add global styles to this file, and also import other style files */
-body{
+body.light{
+  background:	white;
+  color:#0f0f0f;
+}
+body.dark{
   background:	#0f0f0f;
+  color:white;
+}
+body.light .primary{
+  background:#EEEEEE;
+}
+body.dark .primary{
+  background:#0f0f0f;
+}
+body.light .secondary{
+  background:#DDDDDD;
+}
+body.dark .secondary{
+  background:#2B2B2B;
+}
+body.light .text-color{
+  color:#0f0f0f !important;
+}
+body.dark .text-color{
   color:white;
 }

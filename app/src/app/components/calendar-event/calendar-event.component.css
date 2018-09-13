@@ -1,12 +1,17 @@
 .calendar-event{
   position:absolute;
-  background:rgba(255,255,255,0.05);
-  color:white;
+  background:rgba(255,255,255,0.15);
   border-radius:4px;
   width:calc(100% - 4px);
   margin-left:2px;
   text-align:center;
   border-top: solid 4px;
+}
+.calendar-event.flat{
+  color:white;
+}
+.calendar-event.nflat{
+  background:rgba(125,125,125,0.3) !important;
 }
 .compact{
   position:relative;

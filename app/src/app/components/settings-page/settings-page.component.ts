@@ -14,6 +14,8 @@ export class SettingsPageComponent implements OnInit {
   streams;
   palettes;
   curPalette;
+  darkMode:boolean;
+  flatMode:boolean;
   constructor(
     private settingsService:SettingsService,
     private streamService:StreamService,
@@ -32,6 +34,10 @@ export class SettingsPageComponent implements OnInit {
       }
       this.palettes=e;
     });
+    if(!this.settingsService.exists("darkMode"))this.settingsService.set("darkMode",false);
+    if(!this.settingsService.exists("flatMode"))this.settingsService.set("flatMode",true);
+    this.darkMode = this.settingsService.get("darkMode");
+    this.flatMode = this.settingsService.get("flatMode");
   }
   addStream(){
     let p = prompt("nom du stream");
@@ -48,5 +54,17 @@ export class SettingsPageComponent implements OnInit {
     this.colorService.set(palette);
     this.colorService.get().then(p=>this.curPalette=p);
     this.eventColorService.clear();
+  }
+  changeUser(){
+    this.settingsService.user = this.settingsService.user.replace("@enib.fr","")
+    this.settingsService.set('user',this.settingsService.user);
+  }
+  updateSettings(){
+    let that=this;
+    setTimeout(()=>{
+      that.settingsService.set("darkMode",that.darkMode);
+      that.settingsService.set("flatMode",that.flatMode);
+      document.body.className=this.settingsService.get("darkMode")?"dark":"light";
+    },10);
   }
 }

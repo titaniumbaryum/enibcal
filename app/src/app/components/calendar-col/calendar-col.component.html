@@ -2,5 +2,6 @@
   <div *ngFor="let event of events">
     <app-calendar-event [event]="event" [compact]="compact" (click)="details(event);" *ngIf="isIn(event)">
     </app-calendar-event>
+    <div class="nowLine" [style.top]="t2h(today)+'%'" *ngIf="now"></div>
   </div>
 </div>

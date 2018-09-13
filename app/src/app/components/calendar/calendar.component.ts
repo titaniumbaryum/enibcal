@@ -31,6 +31,7 @@ export class CalendarComponent implements OnInit {
   @Input() events:Event[];
   @Input() reload:boolean;
   @Input() day:Date;
+  @Input() loading:Boolean;
   @Output() reloadButton:EventEmitter<boolean> = new EventEmitter();
   side:string="left";
   days:Date[]=[];

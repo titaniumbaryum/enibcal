@@ -12,6 +12,7 @@ import 'rxjs/add/operator/switchMap';
 export class OtherCalendarPageComponent implements OnInit {
   events:Event[];
   today = new Date();
+  loading:boolean;
   constructor(
     private calendarService:CalendarService,
     private route: ActivatedRoute,
@@ -21,9 +22,10 @@ export class OtherCalendarPageComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.loading=true;
     this.calendarService.getFor(this.route.snapshot.paramMap.get('id')).then(e=>{
       this.events=e;
-      console.log(e);
+      this.loading=false;
     });
   }
 

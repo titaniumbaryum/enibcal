@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChildren } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Homework } from "../../structures/homework"
 import { HomeworkService } from "../../services/homework.service"
 
@@ -9,11 +9,21 @@ import { HomeworkService } from "../../services/homework.service"
 })
 export class HomeworkPageComponent implements OnInit {
   homeworks:Homework[]=[];
-  @ViewChildren('edit') edit;
+  @ViewChild('edit') edit;
   constructor(private homeworkService:HomeworkService) { }
 
   ngOnInit() {
     this.homeworkService.get().then(h=>this.homeworks=h);
   }
-
+  remove(homework:Homework){
+    this.homeworks.splice(this.homeworks.indexOf(homework),1);
+  }
+  modify(homework:Homework,e){
+    this.edit.open(homework);
+    setTimeout(function(){e.scrollIntoView(true)},100);
+  }
+  openEdit(e){
+    this.edit.open();
+    setTimeout(function(){e.scrollIntoView(true)},100);
+  }
 }

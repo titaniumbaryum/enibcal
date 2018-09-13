@@ -54,3 +54,9 @@
     height:auto;
   }
 }
+.loader{
+  position: absolute;
+  top:39px;
+  width: 100%;
+  left:0;
+}

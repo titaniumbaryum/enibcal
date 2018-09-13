@@ -5,6 +5,7 @@ import 'rxjs/add/operator/toPromise';
 import { StreamService } from './stream.service';
 import { SettingsService } from './settings.service';
 import { Homework } from '../structures/homework';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class HomeworkService {
@@ -24,7 +25,7 @@ export class HomeworkService {
       }
       for(let stream of streams){
         ended++;
-        this.http.get("http://10.3.61.133:4242/api/homeworks/get?stream="+stream).toPromise()
+        this.http.get(environment.host+"api/homeworks/get?stream="+stream).toPromise()
         .then(response => {
           var jdata = response.json();
           for(let h of jdata){
@@ -50,7 +51,16 @@ export class HomeworkService {
   }
   complete(homework:Homework):Promise<boolean>{
     return new Promise((v,c)=>{
-      this.http.get("http://10.3.61.133:4242/api/homeworks/complete?id="+homework.id+"&user="+this.settingsService.user).toPromise()
+      this.http.get(environment.host+"api/homeworks/complete?id="+homework.id+"&user="+this.settingsService.user).toPromise()
+      .then(response => {
+        v(true);
+      })
+      .catch(this.handleError);
+    });
+  }
+  uncomplete(homework:Homework):Promise<boolean>{
+    return new Promise((v,c)=>{
+      this.http.get(environment.host+"api/homeworks/uncomplete?id="+homework.id+"&user="+this.settingsService.user).toPromise()
       .then(response => {
         v(true);
       })
@@ -59,7 +69,7 @@ export class HomeworkService {
   }
   add(homework:Homework):Promise<number>{
     return new Promise((v,c)=>{
-      this.http.get("http://10.3.61.133:4242/api/homeworks/add",{
+      this.http.get(environment.host+"api/homeworks/add",{
         params: new HttpParams()
           .set('stream', homework.stream)
           .set('title', homework.title)
@@ -73,6 +83,20 @@ export class HomeworkService {
         v(-1);
       })
       .catch(this.handleError);
+    });
+  }
+  remove(homework:Homework):Promise<number>{
+    return new Promise((v,c)=>{
+      if(typeof homework.id != "undefined"){
+        this.http.get(environment.host+"api/homeworks/remove?id="+homework.id).toPromise()
+        .then(response => {
+          console.log("rem");
+          let d=response.json();
+          if(d.lenght>0) v(d[0].id);
+          v(-1);
+        })
+        .catch(this.handleError);
+      }else v(-1);
     });
   }
   private handleError(error: any): Promise<any> {

@@ -1,6 +1,7 @@
 import { Component, OnInit,Input } from '@angular/core';
 import { Event } from '../../structures/event';
 import { EventColorService } from '../../services/event-color.service';
+import { SettingsService } from '../../services/settings.service';
 @Component({
   selector: 'app-calendar-event',
   templateUrl: './calendar-event.component.html',
@@ -12,7 +13,9 @@ export class CalendarEventComponent implements OnInit {
   begin=8*60;
   end=19*60;
   color:string;
-  constructor(private eventColorService:EventColorService) {
+  flat:boolean;
+  constructor(private eventColorService:EventColorService,private settingsService:SettingsService) {
+    this.flat=this.settingsService.get("flatMode");
   }
 
   ngOnInit() {
