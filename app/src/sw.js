@@ -1,4 +1,4 @@
-var CACHE_NAME = 'enibcal-006';
+var CACHE_NAME = 'enibcal-007';
 var urlsToCache = [
 ];
 
