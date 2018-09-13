@@ -11,7 +11,7 @@ export class SettingsService {
     else localStorage[id]=JSON.stringify(val);
   }
   get(id:string){
-    if(!(id in localStorage)) throw `undefined setting ${id}`;
+    //if(!(id in localStorage)) throw `undefined setting ${id}`;
     try{
       return JSON.parse(localStorage[id]);
     }catch(e){
