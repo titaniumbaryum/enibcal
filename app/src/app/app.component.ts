@@ -11,7 +11,7 @@ import { SettingsService } from "./services/settings.service"
 })
 export class AppComponent {
   @ViewChildren('menu') menu;
-  serviceworker = true;
+  serviceworker = false;
   dark:boolean;
   constructor(
     private calendarService:CalendarService,

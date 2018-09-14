@@ -30,12 +30,15 @@ import { HomeworkPageComponent } from './components/homework-page/homework-page.
 import { HomeworkComponent } from './components/homework/homework.component';
 import { HomeworkEditComponent } from './components/homework-edit/homework-edit.component';
 import { LoaderComponent } from './components/loader/loader.component';
+import { EventDetailsComponent } from './components/event-details/event-details.component';
+import { EventPageComponent } from './components/event-page/event-page.component';
 
 const appRoutes: Routes = [
   { path: 'homeworks', component: HomeworkPageComponent },
   { path: 'settings', component: SettingsPageComponent },
   { path: 'my-calendar', component: MyCalendarPageComponent },
   { path: 'calendar/:id',      component: OtherCalendarPageComponent },
+  { path: 'event/:id',      component: EventPageComponent },
   { path: '',
     redirectTo: '/my-calendar',
     pathMatch: 'full'
@@ -59,7 +62,9 @@ const appRoutes: Routes = [
     HomeworkPageComponent,
     HomeworkComponent,
     HomeworkEditComponent,
-    LoaderComponent
+    LoaderComponent,
+    EventDetailsComponent,
+    EventPageComponent
   ],
   imports: [
     BrowserModule,

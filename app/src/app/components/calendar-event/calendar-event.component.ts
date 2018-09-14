@@ -1,4 +1,5 @@
 import { Component, OnInit,Input } from '@angular/core';
+import { Router } from '@angular/router';
 import { Event } from '../../structures/event';
 import { EventColorService } from '../../services/event-color.service';
 import { SettingsService } from '../../services/settings.service';
@@ -14,7 +15,11 @@ export class CalendarEventComponent implements OnInit {
   end=19*60;
   color:string;
   flat:boolean;
-  constructor(private eventColorService:EventColorService,private settingsService:SettingsService) {
+  constructor(
+    private eventColorService:EventColorService,
+    private settingsService:SettingsService,
+    private router:Router
+  ) {
     this.flat=this.settingsService.get("flatMode");
   }
 
@@ -28,5 +33,8 @@ export class CalendarEventComponent implements OnInit {
   t2h(time:Date){
     let rer = (time.getHours()*60+time.getMinutes()-this.begin)/(this.end-this.begin)*100;
     return rer;
+  }
+  details(){
+    this.router.navigateByUrl("event/"+this.event.id);
   }
 }

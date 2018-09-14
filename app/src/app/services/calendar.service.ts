@@ -31,13 +31,13 @@ export class CalendarService {
     let pevents = JSON.parse(peventss);
     let events:Event[] = [];
     for(let pevent of pevents){
-      events.push({
+      events.push(new Event({
         begin:new Date(pevent.begin),
         end:new Date(pevent.end),
         location:pevent.location,
         title:pevent.title,
         description:pevent.description,
-      });
+      }));
     }
     return events;
   }
@@ -45,13 +45,13 @@ export class CalendarService {
     let pevents = JSON.parse(peventss);
     let events:Event[] = [];
     for(let pevent of pevents){
-      events.push({
+      events.push(new Event({
         begin:new Date(pevent.DTSTART),
         end:new Date(pevent.DTEND),
         location:pevent.LOCATION,
         title:pevent.SUMMARY,
         description:pevent.DESCRIPTION,
-      });
+      }));
     }
     return events;
   }

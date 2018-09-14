@@ -24,14 +24,14 @@ export class CalendarColComponent implements OnInit {
       that.today = new Date();
     },1000*60);
   }
-  details(event:Event){
+  /*details(event:Event){
     alert(
       event.title+" "+event.location+"\n"+
       event.description.replace(/\\n/g,"\n")+"\n"+
       "de: "+event.begin.toLocaleTimeString()+"\n"+
       "à: "+event.end.toLocaleTimeString()
     );
-  }
+  }*/
   isIn(event:Event){
     if(typeof this.day !== "undefined" && typeof event !== "undefined"){
       return (this.day.getDate()==event.begin.getDate()) &&
